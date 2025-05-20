@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta de Amor</title>
+  <style>
+    body {
+      background: #ffe6f0;
+      color: #4b2c3f;
+      font-family: 'Georgia', serif;
+      padding: 40px;
+      animation: fadeIn 3s ease-in;
+      position: relative;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      margin-bottom: 40px;
+      color: #b30059;
+    }
+
+    .paragrafo {
+      max-width: 700px;
+      margin: 20px auto;
+      font-size: 1.2em;
+      text-align: left;
+      opacity: 0;
+      transition: opacity 1s ease-in;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d88;
+      font-size: 24px;
+      animation: float 6s infinite ease-in-out;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-50px); opacity: 0.6; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    #carta {
+      display: none;
+      animation: fadeIn 2s ease-in;
+      z-index: 1;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 20px 10px;
+    }
+
+    audio {
+      display: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botões -->
+  <button id="botaoAbrir" onclick="abrirCarta()">Abrir Carta</button>
+  <button id="botaoMusica" onclick="tocarMusica()">Ativar Música</button>
+
+  <!-- Música -->
+  <audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Carta -->
+  <div id="carta">
+    <h1>Para: Leandro Jorge de Assunção Balsemão Kiffen</h1>
+
+    <div class="paragrafo">O que sinto por ti é paradoxal.<br>
+    Dás-me borboletas no estômago e fico entusiasmada sempre que vou te ver — mas, quando estou contigo, não me sinto ansiosa.<br>
+    Sinto-me em paz. És calmaria.</div>
+
+    <div class="paragrafo">É um paradoxo: fico extasiada ao ouvir a tua voz, como se a minha alma se arrepiasse ao escutá-la. E, mesmo assim, consigo prestar atenção a cada palavra tua, como se a tua voz me puxasse para o mundo em vez de me perder nele.</div>
+
+    <div class="paragrafo">O teu cheiro… sou viciada no teu cheiro. Não apenas no perfume que usas, mas no cheiro que a tua pele liberta naturalmente. Como se as minhas papilas olfativas fossem atraídas por tudo o que o teu corpo exala.<br>
+    O cheiro da tua respiração entorpece-me.<br>
+    A tua voz e a tua respiração são agora os meus sons preferidos.</div>
+
+    <div class="paragrafo">Fazes-me escrever cartas de amor.<br>
+    E sinto-me ridícula por isso.</div>
+
+    <div class="paragrafo">Como disse Fernando Pessoa:<br>
+    “Todas as cartas de amor são ridículas.<br>
+    Não seriam cartas de amor se não fossem ridículas.<br>
+    Todas as palavras esdrúxulas,<br>
+    Como os sentimentos esdrúxulos,<br>
+    São naturalmente ridículas.”</div>
+
+    <div class="paragrafo">Nesse caso, é uma honra ser ridícula.</div>
+
+    <!-- Botão de resposta -->
+    <a href="https://wa.me/351963793712?text=Acabei%20de%20ler%20a%20carta" target="_blank">
+      <button>Responder pelo WhatsApp</button>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function abrirCarta() {
+      document.getElementById("botaoAbrir").style.display = "none";
+      document.getElementById("botaoMusica").style.display = "none";
+      document.getElementById("carta").style.display = "block";
+      iniciarCoracoes();
+      iniciarFlores();
+      revelarTextoLinhaPorLinha();
+    }
+
+    function tocarMusica() {
+      const musica = document.getElementById("musica");
+      musica.play();
+    }
+
+    function iniciarCoracoes() {
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "❤";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+        heart.style.fontSize = (20 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+      }
+      setInterval(createHeart, 800);
+    }
+
+    function iniciarFlores() {
+      function createFlower() {
+        const flower = document.createElement("div");
+        flower.innerText = "🌸";
+        flower.style.position = "absolute";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.top = "-30px";
+        flower.style.fontSize = (20 + Math.random() * 20) + "px";
+        flower.style.opacity = Math.random();
+        flower.style.animation = "fall 8s linear";
+        flower.style.pointerEvents = "none";
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 8000);
+      }
+      setInterval(createFlower, 1200);
+    }
+
+    function revelarTextoLinhaPorLinha() {
+      const paragrafos = document.querySelectorAll(".paragrafo");
+      paragrafos.forEach((p, i) => {
+        setTimeout(() => {
+          p.style.opacity = 1;
+        }, i * 2500);
+      });
+    }
+  </script>
+
+</body>
+</html>
